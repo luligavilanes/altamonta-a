@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIM - Alta Montaña | Terminal Inteligente de Mendoza</title>
   
-  <!-- Tailwind CSS CDN -->
+  <!-- CDN de Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts - Inter & Playfair Display -->
@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
   
-  <!-- Lucide Icons (Web component version) -->
+  <!-- Iconos de Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
@@ -25,7 +25,7 @@
               50: '#fdf2f4',
               100: '#fbe5ea',
               200: '#f6ced6',
-              500: '#8c1d32', // Bordó/Vino Principal
+              500: '#8c1d32', // Bordó/Vino Principal de Mendoza
               600: '#751425',
               700: '#5c101d',
               900: '#3a070f',
@@ -61,69 +61,37 @@
       background: #8c1d32;
       border-radius: 4px;
     }
-    /* Filtro de accesibilidad para modo alto contraste */
-    .alto-contraste {
-      filter: contrast(1.2) saturate(1.1);
+    /* Animación fluida de entrada al cambiar de sección */
+    .tab-section {
+      animation: fadeIn 0.4s ease-in-out forwards;
     }
-    .alto-contraste body {
-      background-color: #000 !important;
-      color: #fff !important;
-    }
-    .alto-contraste .bg-white {
-      background-color: #111 !important;
-      color: #fff !important;
-      border-color: #fff !important;
-    }
-    .alto-contraste .text-gray-600, .alto-contraste .text-gray-500 {
-      color: #ddd !important;
-    }
-    .alto-contraste .bg-gray-50, .alto-contraste .bg-gray-100 {
-      background-color: #222 !important;
-    }
-    .alto-contraste .text-vini-500, .alto-contraste .text-vini-600 {
-      color: #ff8093 !important;
-    }
-    .alto-contraste .bg-vini-500, .alto-contraste .bg-vini-600 {
-      background-color: #fff !important;
-      color: #000 !important;
-      border: 2px solid #fff;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body class="bg-arena-50 text-gray-800 font-sans min-h-screen selection:bg-vini-200 selection:text-vini-900 transition-colors duration-300">
 
-  <!-- ACCESIBILITY BAR (TOP-FLOAT) -->
-  <div id="accBar" class="bg-vini-900 text-white text-xs py-2 px-4 sticky top-0 z-50 transition-all duration-300 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+  <!-- BANNER INFORMATIVO DE ACCESIBILIDAD (TOP BAR) -->
+  <div class="bg-vini-900 text-white text-xs py-2 px-4 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center space-x-2">
-        <span class="inline-block w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></span>
-        <span class="font-medium tracking-wide text-[11px] uppercase">TIM ACCESIBLE: Conectividad Certificada WCAG 2.1 AA</span>
+        <span class="inline-block w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
+        <span class="font-medium tracking-wide text-[11px] uppercase">TIM ACCESIBLE: Conectividad Certificada para Todos los Pasajeros</span>
       </div>
-      <div class="flex items-center space-x-4">
-        <button onclick="toggleContraste()" class="flex items-center space-x-1 hover:text-vini-200 transition focus:outline-2 focus:outline-white p-1 rounded" aria-label="Cambiar alto contraste">
-          <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline font-semibold">Contraste</span>
-        </button>
-        <button onclick="changeFontSize(1)" class="flex items-center space-x-1 hover:text-vini-200 transition p-1" aria-label="Agrandar letra">
-          <span class="font-bold text-xs">A+</span>
-        </button>
-        <button onclick="changeFontSize(-1)" class="flex items-center space-x-1 hover:text-vini-200 transition p-1" aria-label="Achicar letra">
-          <span class="font-bold text-[10px]">A-</span>
-        </button>
-        <button onclick="simularVozGuia()" class="flex items-center space-x-1 hover:text-vini-200 text-pink-200 transition p-1 rounded border border-pink-700 px-2 bg-vini-900" aria-label="Asistente de Voz">
-          <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
-          <span class="font-semibold text-[11px]">Asistente de Voz</span>
-        </button>
+      <div class="hidden sm:flex items-center space-x-2 text-pink-200 text-[11px]">
+        <span>Terminal Adaptada • Prioridad de Embarque</span>
       </div>
     </div>
   </div>
 
   <!-- HEADER / FIXED NAVBAR -->
-  <header class="bg-white/95 backdrop-blur-md sticky top-[36px] z-40 border-b border-arena-200 shadow-sm transition-all duration-300">
+  <header class="bg-white/95 backdrop-blur-md sticky top-[32px] z-40 border-b border-arena-200 shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
-        <!-- Brand Logo -->
-        <a href="#inicio" class="flex items-center space-x-3 group" aria-label="Ir al inicio de TIM">
+        <!-- Logotipo de la Terminal -->
+        <button onclick="showSection('inicio')" class="flex items-center space-x-3 group text-left" aria-label="Ir al inicio de TIM">
           <div class="w-12 h-12 bg-vini-500 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl shadow-md group-hover:scale-105 transition-all duration-300">
             TIM
           </div>
@@ -131,984 +99,949 @@
             <span class="text-xl font-bold text-vini-900 tracking-tight leading-tight group-hover:text-vini-600 transition">ALTA MONTAÑA</span>
             <span class="text-[10px] uppercase tracking-widest text-gray-500">Terminal Inteligente Mendoza</span>
           </div>
-        </a>
+        </button>
 
-        <!-- Desktop Navigation Menu -->
+        <!-- Navegación de Escritorio -->
         <nav class="hidden lg:flex space-x-1" aria-label="Navegación principal">
-          <a href="#inicio" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Inicio</a>
-          <a href="#servicios" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Servicios</a>
-          <a href="#paradas" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Recorrido</a>
-          <a href="#mapa" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Mapa</a>
-          <a href="#horarios" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Horarios</a>
-          <a href="#accesibilidad" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Accesibilidad</a>
-          <a href="#contacto" class="px-4 py-2 text-sm font-semibold text-gray-600 rounded-lg hover:text-vini-500 hover:bg-vini-50 transition">Contacto</a>
+          <button onclick="showSection('inicio')" id="nav-inicio" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Inicio</button>
+          <button onclick="showSection('servicios')" id="nav-servicios" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Servicios</button>
+          <button onclick="showSection('paradas')" id="nav-paradas" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Recorrido</button>
+          <button onclick="showSection('mapa')" id="nav-mapa" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Mapa</button>
+          <button onclick="showSection('horarios')" id="nav-horarios" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Horarios</button>
+          <button onclick="showSection('accesibilidad')" id="nav-accesibilidad" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Accesibilidad</button>
+          <button onclick="showSection('contacto')" id="nav-contacto" class="nav-btn px-4 py-2 text-sm font-semibold rounded-lg transition">Contacto</button>
         </nav>
 
-        <!-- CTAs & Action buttons -->
+        <!-- CTA Botón -->
         <div class="hidden lg:flex items-center space-x-3">
-          <a href="#horarios" class="px-5 py-2.5 bg-vini-500 hover:bg-vini-600 text-white font-semibold text-sm rounded-xl shadow-lg shadow-vini-500/20 transition duration-300 text-center">
+          <button onclick="showSection('horarios')" class="px-5 py-2.5 bg-vini-500 hover:bg-vini-600 text-white font-semibold text-sm rounded-xl shadow-lg shadow-vini-500/20 transition duration-300 text-center">
             Ver Horarios
-          </a>
+          </button>
         </div>
 
-        <!-- Mobile Menu Toggle Button -->
+        <!-- Botón de Menú Mobile -->
         <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-600 hover:text-vini-500 focus:outline-none" aria-label="Abrir menú de navegación">
           <i id="menuIcon" data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
+    <!-- Navegación Desplegable Mobile -->
     <div id="mobileMenu" class="hidden lg:hidden border-t border-arena-200 bg-white transition-all duration-300">
       <div class="px-4 py-3 space-y-2">
-        <a href="#inicio" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Inicio</a>
-        <a href="#servicios" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Servicios</a>
-        <a href="#paradas" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Recorrido</a>
-        <a href="#mapa" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Mapa</a>
-        <a href="#horarios" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Horarios</a>
-        <a href="#accesibilidad" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Accesibilidad</a>
-        <a href="#contacto" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-vini-50 rounded-lg hover:text-vini-500">Contacto</a>
+        <button onclick="showSection('inicio')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Inicio</button>
+        <button onclick="showSection('servicios')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Servicios</button>
+        <button onclick="showSection('paradas')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Recorrido</button>
+        <button onclick="showSection('mapa')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Mapa</button>
+        <button onclick="showSection('horarios')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Horarios</button>
+        <button onclick="showSection('accesibilidad')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Accesibilidad</button>
+        <button onclick="showSection('contacto')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 text-base font-medium rounded-lg">Contacto</button>
         <div class="pt-3 pb-1 border-t border-arena-100 flex flex-col space-y-2">
-          <a href="#horarios" onclick="toggleMobileMenu()" class="w-full text-center px-4 py-2.5 bg-vini-500 hover:bg-vini-600 text-white rounded-lg font-semibold text-sm">Ver Horarios</a>
-          <button onclick="abrirAsistenciaModal()" class="w-full text-center px-4 py-2.5 bg-arena-100 text-vini-900 border border-vini-200 rounded-lg font-semibold text-sm">Solicitar Asistencia</button>
+          <button onclick="showSection('horarios')" class="w-full text-center px-4 py-2.5 bg-vini-500 hover:bg-vini-600 text-white rounded-lg font-semibold text-sm">Ver Horarios</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="inicio" class="relative bg-vini-900 text-white overflow-hidden py-16 sm:py-24 lg:py-32">
-    <!-- Background Design Details -->
-    <div class="absolute inset-0 opacity-15 pointer-events-none">
-      <!-- Geometric Mountain Patterns -->
-      <svg class="absolute bottom-0 left-0 w-full h-full text-white" preserveAspectRatio="none" viewBox="0 0 1440 400" fill="currentColor">
-        <path d="M0,288L120,266.7C240,245,480,203,720,208C960,213,1200,267,1320,293.3L1440,320L1440,400L1320,400C1200,400,960,400,720,400C480,400,240,400,120,400L0,400Z"></path>
-        <path d="M0,192L240,224C480,256,960,320,1200,304L1440,288L1440,400L1200,400C960,400,480,400,240,400L0,400Z" opacity="0.5"></path>
-      </svg>
-      <div class="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-pink-500 to-transparent filter blur-3xl opacity-30"></div>
-    </div>
+  <!-- SECCIONES DE CONTENIDO DE CADA PESTAÑA -->
+  <main>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- Hero Text -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center space-x-2 bg-vini-800/80 border border-vini-700 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-pink-200">
-            <i data-lucide="compass" class="w-3.5 h-3.5 text-pink-300 animate-spin" style="animation-duration: 10s"></i>
-            <span>Servicio Interurbano de Pasajeros</span>
-          </div>
-          
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif tracking-tight leading-none text-white">
-            Alta Montaña
-          </h1>
-          
-          <p class="text-xl font-medium text-pink-100 max-w-2xl">
-            Conectá Mendoza con la imponente Cordillera de los Andes.
-          </p>
-          
-          <p class="text-base text-gray-300 max-w-xl leading-relaxed">
-            Viajá desde la Terminal Inteligente de Mendoza (TIM) hacia los principales destinos de alta montaña. Salidas garantizadas, unidades 100% accesibles y recorridos perfectos para turistas, residentes y trabajadores cordilleranos.
-          </p>
+    <!-- ========== PESTAÑA 1: INICIO ========== -->
+    <section id="inicio" class="tab-section relative bg-vini-900 text-white overflow-hidden py-16 sm:py-24 lg:py-32">
+      <!-- Elementos Decorativos de Fondo -->
+      <div class="absolute inset-0 opacity-15 pointer-events-none">
+        <svg class="absolute bottom-0 left-0 w-full h-full text-white" preserveAspectRatio="none" viewBox="0 0 1440 400" fill="currentColor">
+          <path d="M0,288L120,266.7C240,245,480,203,720,208C960,213,1200,267,1320,293.3L1440,320L1440,400L1320,400C1200,400,960,400,720,400C480,400,240,400,120,400L0,400Z"></path>
+          <path d="M0,192L240,224C480,256,960,320,1200,304L1440,288L1440,400L1200,400C960,400,480,400,240,400L0,400Z" opacity="0.5"></path>
+        </svg>
+        <div class="absolute top-10 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-pink-500 to-transparent filter blur-3xl opacity-30"></div>
+      </div>
 
-          <div class="flex flex-col sm:flex-row gap-4 pt-4">
-            <a href="#horarios" class="px-8 py-4 bg-white text-vini-900 font-bold rounded-xl shadow-xl hover:bg-vini-50 transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
-              <i data-lucide="clock" class="w-5 h-5 text-vini-500"></i>
-              Ver Horarios de Salida
-            </a>
-            <a href="#paradas" class="px-8 py-4 bg-vini-800/80 hover:bg-vini-700 text-white border border-vini-600 font-bold rounded-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
-              <i data-lucide="map-pin" class="w-5 h-5 text-pink-300"></i>
-              Ver Paradas y Recorrido
-            </a>
-          </div>
-
-          <!-- Hero Highlights / Stats -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-vini-800/70">
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
-                <i data-lucide="zap" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Salidas</p>
-                <p class="text-lg font-bold text-white">Diarias</p>
-              </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Texto del Hero -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-vini-800/80 border border-vini-700 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-pink-200">
+              <i data-lucide="compass" class="w-3.5 h-3.5 text-pink-300 animate-spin" style="animation-duration: 10s"></i>
+              <span>Servicio Interurbano de Pasajeros</span>
             </div>
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
-                <i data-lucide="mountain" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Destinos</p>
-                <p class="text-lg font-bold text-white">Turísticos</p>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
-                <i data-lucide="accessibility" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Inclusión</p>
-                <p class="text-lg font-bold text-white">100% Accesible</p>
-              </div>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
-                <i data-lucide="route" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Recorrido</p>
-                <p class="text-lg font-bold text-white">Interurbano</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Graphic (Interactive Simulated Route Map / Image Frame) -->
-        <div class="lg:col-span-5 relative flex justify-center">
-          <div class="w-full max-w-md bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-lg shadow-2xl relative overflow-hidden group">
-            <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/20 rounded-full blur-2xl"></div>
             
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
-              <div class="flex items-center space-x-2">
-                <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
-                <span class="text-xs font-semibold tracking-wider text-emerald-300">OPERANDO NORMALMENTE</span>
-              </div>
-              <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full uppercase text-gray-300">Ruta Nac. 7</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif tracking-tight leading-none text-white">
+              Alta Montaña
+            </h1>
+            
+            <p class="text-xl font-medium text-pink-100 max-w-2xl">
+              Conectá Mendoza con la imponente Cordillera de los Andes.
+            </p>
+            
+            <p class="text-base text-gray-300 max-w-xl leading-relaxed">
+              Viajá desde la Terminal Inteligente de Mendoza (TIM) hacia los principales destinos de alta montaña. Salidas garantizadas, unidades 100% accesibles y recorridos perfectos para turistas, residentes y trabajadores cordilleranos.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <button onclick="showSection('horarios')" class="px-8 py-4 bg-white text-vini-900 font-bold rounded-xl shadow-xl hover:bg-vini-50 transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                <i data-lucide="clock" class="w-5 h-5 text-vini-500"></i>
+                Ver Horarios de Salida
+              </button>
+              <button onclick="showSection('paradas')" class="px-8 py-4 bg-vini-800/80 hover:bg-vini-700 text-white border border-vini-600 font-bold rounded-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                <i data-lucide="map-pin" class="w-5 h-5 text-pink-300"></i>
+                Ver Paradas y Recorrido
+              </button>
             </div>
 
-            <!-- Simulated mountain scenery card -->
-            <div class="relative rounded-lg overflow-hidden h-48 bg-vini-950 mb-4">
-              <!-- Inline SVG Sketch Outline of Mendoza Mountain Scenery with winding route -->
-              <svg class="absolute inset-0 w-full h-full text-pink-700/40" preserveAspectRatio="none" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Mountain Backdrops -->
-                <path d="M0 200 L100 80 L220 150 L310 50 L400 200 Z" fill="currentColor"/>
-                <path d="M50 200 L180 100 L300 170 L400 90 L400 200 Z" fill="currentColor" opacity="0.5"/>
-                <!-- Winding Route Line -->
-                <path d="M20 180 Q 150 160 180 120 T 300 80 T 380 40" stroke="#f4efe9" stroke-width="4" stroke-linecap="round" fill="none"/>
-                <!-- Pulse points -->
-                <circle cx="180" cy="120" r="6" fill="#fbc5c5" class="animate-ping"/>
-                <circle cx="180" cy="120" r="4" fill="#8c1d32"/>
-                <circle cx="300" cy="80" r="4" fill="#8c1d32"/>
-              </svg>
-              <!-- Info overlay -->
-              <div class="absolute bottom-3 left-3 bg-vini-950/80 px-3 py-1.5 rounded-lg border border-white/10">
-                <p class="text-[10px] text-pink-300 font-bold uppercase tracking-widest">Destino Icónico</p>
-                <p class="text-xs text-white font-extrabold font-serif">Cerro Aconcagua (6.961 m)</p>
+            <!-- Métricas e Información Destacada -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-vini-800/70">
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
+                  <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Salidas</p>
+                  <p class="text-lg font-bold text-white">Diarias</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
+                  <i data-lucide="mountain" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Destinos</p>
+                  <p class="text-lg font-bold text-white">Turísticos</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
+                  <i data-lucide="accessibility" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Inclusión</p>
+                  <p class="text-lg font-bold text-white">100% Accesible</p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-800 rounded-lg text-pink-300">
+                  <i data-lucide="route" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-pink-200 uppercase tracking-wider font-semibold">Recorrido</p>
+                  <p class="text-lg font-bold text-white">Interurbano</p>
+                </div>
               </div>
             </div>
+          </div>
 
-            <!-- Service Details -->
-            <div class="space-y-3 text-sm text-gray-200">
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400">Origen</span>
-                <span class="font-bold text-white">TIM (Mendoza Capital)</span>
+          <!-- Componente Gráfico Lateral -->
+          <div class="lg:col-span-5 relative flex justify-center">
+            <div class="w-full max-w-md bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-lg shadow-2xl relative overflow-hidden group">
+              <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/20 rounded-full blur-2xl"></div>
+              
+              <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+                <div class="flex items-center space-x-2">
+                  <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+                  <span class="text-xs font-semibold tracking-wider text-emerald-300">OPERANDO NORMALMENTE</span>
+                </div>
+                <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded-full uppercase text-gray-300">Ruta Nac. 7</span>
               </div>
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400">Destino Extremo</span>
-                <span class="font-bold text-white">Las Cuevas / Las Leñas</span>
+
+              <!-- Simulación de paisaje cordillerano -->
+              <div class="relative rounded-lg overflow-hidden h-48 bg-vini-950 mb-4">
+                <svg class="absolute inset-0 w-full h-full text-pink-700/40" preserveAspectRatio="none" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 200 L100 80 L220 150 L310 50 L400 200 Z" fill="currentColor"/>
+                  <path d="M50 200 L180 100 L300 170 L400 90 L400 200 Z" fill="currentColor" opacity="0.5"/>
+                  <path d="M20 180 Q 150 160 180 120 T 300 80 T 380 40" stroke="#f4efe9" stroke-width="4" stroke-linecap="round" fill="none"/>
+                  <circle cx="180" cy="120" r="6" fill="#fbc5c5" class="animate-ping"/>
+                  <circle cx="180" cy="120" r="4" fill="#8c1d32"/>
+                  <circle cx="300" cy="80" r="4" fill="#8c1d32"/>
+                </svg>
+                <div class="absolute bottom-3 left-3 bg-vini-950/80 px-3 py-1.5 rounded-lg border border-white/10">
+                  <p class="text-[10px] text-pink-300 font-bold uppercase tracking-widest">Destino Icónico</p>
+                  <p class="text-xs text-white font-extrabold font-serif">Cerro Aconcagua (6.961 m)</p>
+                </div>
               </div>
-              <div class="flex justify-between items-center py-1">
-                <span class="text-gray-400">Seguridad Cordillera</span>
-                <span class="font-bold text-emerald-400 flex items-center gap-1">
-                  <i data-lucide="check" class="w-4 h-4"></i> Alta Tracción & WiFi
-                </span>
+
+              <div class="space-y-3 text-sm text-gray-200">
+                <div class="flex justify-between items-center py-1 border-b border-white/5">
+                  <span class="text-gray-400">Origen</span>
+                  <span class="font-bold text-white">TIM (Mendoza Capital)</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-white/5">
+                  <span class="text-gray-400">Destino Extremo</span>
+                  <span class="font-bold text-white">Las Cuevas / Las Leñas</span>
+                </div>
+                <div class="flex justify-between items-center py-1">
+                  <span class="text-gray-400">Seguridad Cordillera</span>
+                  <span class="font-bold text-emerald-400 flex items-center gap-1">
+                    <i data-lucide="check" class="w-4 h-4"></i> Alta Tracción & WiFi
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SERVICIO / INFORMACIÓN -->
-  <section id="servicios" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Información del Transporte</h2>
-        <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
-          Terminal Inteligente de Mendoza (TIM)
-        </p>
-        <p class="text-base text-gray-600 mt-4 leading-relaxed">
-          Un servicio público de transporte interurbano optimizado para conectar la gran urbe con los rincones más altos e imponentes de la cordillera mendocina, garantizando el traslado seguro de excursionistas, trabajadores locales y visitantes internacionales.
-        </p>
-      </div>
-
-      <!-- Feature Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Feature 1 -->
-        <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
-          <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
-            <i data-lucide="bus-front" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-lg font-bold text-vini-900 mb-3">Transporte Interurbano</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Micros de alta gama, calefaccionados y especialmente diseñados para circular de forma segura por las pendientes de la Ruta 7.
+    <!-- ========== PESTAÑA 2: SERVICIOS ========== -->
+    <section id="servicios" class="tab-section py-20 bg-white hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Información del Transporte</h2>
+          <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
+            Terminal Inteligente de Mendoza (TIM)
+          </p>
+          <p class="text-base text-gray-600 mt-4 leading-relaxed">
+            Un servicio público de transporte interurbano optimizado para conectar la gran urbe con los rincones más altos e imponentes de la cordillera mendocina, garantizando el traslado seguro de excursionistas, trabajadores locales y visitantes internacionales.
           </p>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
-          <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
-            <i data-lucide="globe-2" class="w-6 h-6"></i>
+        <!-- Cuadrícula de Atributos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
+            <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
+              <i data-lucide="bus-front" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-vini-900 mb-3">Transporte Interurbano</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Micros de alta gama, calefaccionados y especialmente diseñados para circular de forma segura por las pendientes de la Ruta 7.
+            </p>
           </div>
-          <h3 class="text-lg font-bold text-vini-900 mb-3">Conexión Turística</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Vías directas a los miradores, zonas hoteleras, senderos de trekking y centros termales emblemáticos de la cordillera.
-          </p>
+
+          <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
+            <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
+              <i data-lucide="globe-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-vini-900 mb-3">Conexión Turística</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Vías directas a los miradores, zonas hoteleras, senderos de trekking y centros termales de la cordillera.
+            </p>
+          </div>
+
+          <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
+            <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
+              <i data-lucide="milestone" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-vini-900 mb-3">Ruta de los Andes</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Abarca más de 200 km de conectividad de montaña en un trayecto seguro hacia el límite internacional de frontera con Chile.
+            </p>
+          </div>
+
+          <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
+            <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
+              <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-vini-900 mb-3">Servicio Accesible</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Asistencia en embarque, plataformas niveladas, rampas y un plan de acción para viajeros de movilidad reducida.
+            </p>
+          </div>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
-          <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
-            <i data-lucide="milestone" class="w-6 h-6"></i>
+        <!-- Banner de Detalle -->
+        <div class="bg-vini-50 border border-vini-100 rounded-3xl p-8 sm:p-12 mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-4">
+            <h3 class="text-2xl font-serif font-bold text-vini-900">Un viaje seguro, sin importar la altitud</h3>
+            <p class="text-gray-700 leading-relaxed">
+              El servicio de Alta Montaña permite conectar la ciudad de Mendoza con paisajes naturales, zonas turísticas y puntos clave de la cordillera, facilitando el traslado seguro hacia destinos de alto valor histórico, recreativo y paisajístico. El aire puro de Mendoza te espera con el mejor confort.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Potrerillos</span>
+              </span>
+              <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Uspallata</span>
+              </span>
+              <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Aconcagua</span>
+              </span>
+              <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Las Leñas</span>
+              </span>
+            </div>
           </div>
-          <h3 class="text-lg font-bold text-vini-900 mb-3">Ruta de los Andes</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Abarca más de 200 km de conectividad de montaña en un trayecto seguro hacia el límite internacional de frontera con Chile.
-          </p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="bg-arena-50 border border-arena-200 p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-vini-200 transition duration-300">
-          <div class="w-12 h-12 bg-vini-50 rounded-xl flex items-center justify-center text-vini-500 mb-6">
-            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+          <div class="lg:col-span-4 flex justify-center lg:justify-end">
+            <button onclick="showSection('contacto')" class="px-6 py-4 bg-vini-500 hover:bg-vini-600 text-white font-bold rounded-xl shadow-md transition whitespace-nowrap">
+              Preguntas Frecuentes
+            </button>
           </div>
-          <h3 class="text-lg font-bold text-vini-900 mb-3">Servicio Accesible</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Asistencia en embarque, plataformas niveladas, rampas y un plan de acción para viajeros de movilidad reducida.
-          </p>
-        </div>
-      </div>
-
-      <!-- Extended Info Banner -->
-      <div class="bg-vini-50 border border-vini-100 rounded-3xl p-8 sm:p-12 mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-8 space-y-4">
-          <h3 class="text-2xl font-serif font-bold text-vini-900">Un viaje seguro, sin importar la altitud</h3>
-          <p class="text-gray-700 leading-relaxed">
-            El servicio de Alta Montaña permite conectar la ciudad de Mendoza con paisajes naturales, zonas turísticas y puntos clave de la cordillera, facilitando el traslado seguro hacia destinos de alto valor histórico, recreativo y paisajístico. El aire puro de Mendoza te espera con el mejor confort.
-          </p>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
-              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Potrerillos</span>
-            </span>
-            <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
-              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Uspallata</span>
-            </span>
-            <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
-              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Aconcagua</span>
-            </span>
-            <span class="inline-flex items-center space-x-1 bg-white border border-vini-100 px-3 py-1 rounded-full text-xs font-semibold text-vini-800">
-              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Las Leñas</span>
-            </span>
-          </div>
-        </div>
-        <div class="lg:col-span-4 flex justify-center lg:justify-end">
-          <button onclick="document.getElementById('contacto').scrollIntoView();" class="px-6 py-4 bg-vini-500 hover:bg-vini-600 text-white font-bold rounded-xl shadow-md transition whitespace-nowrap">
-            Preguntas Frecuentes
-          </button>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- INTERACTIVE ROUTE SIMULATOR & PARADAS -->
-  <section id="paradas" class="py-20 bg-arena-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Interactive Explorer</h2>
-        <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
-          Estaciones y Paradas de Alta Montaña
-        </p>
-        <p class="text-gray-600 text-sm sm:text-base mt-4">
-          Seleccioná cualquier parada de la lista para ver su información clave, descripción y altitud en nuestro visor dinámico cordillerano.
-        </p>
-      </div>
-
-      <!-- Interactive Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- List of Stops (Left Side) -->
-        <div class="lg:col-span-5 space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-          
-          <!-- Stop 1 -->
-          <button onclick="selectStop(1)" id="stop-btn-1" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-500 text-white font-bold text-sm flex items-center justify-center shadow-md">1</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Terminal Inteligente de Mendoza</h4>
-                <p class="text-xs text-gray-500">Punto de Partida (Origen)</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 2 -->
-          <button onclick="selectStop(2)" id="stop-btn-2" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">2</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Dique Potrerillos</h4>
-                <p class="text-xs text-gray-500">Emblemático espejo de agua</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 3 -->
-          <button onclick="selectStop(3)" id="stop-btn-3" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">3</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Valle de Uspallata</h4>
-                <p class="text-xs text-gray-500">Punto clave de descanso e historia</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 4 -->
-          <button onclick="selectStop(4)" id="stop-btn-4" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">4</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Penitentes</h4>
-                <p class="text-xs text-gray-500">Paisajes de nieve y sendas de roca</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 5 -->
-          <button onclick="selectStop(5)" id="stop-btn-5" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">5</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Puente del Inca</h4>
-                <p class="text-xs text-gray-500">Monumento natural y termas</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 6 -->
-          <button onclick="selectStop(6)" id="stop-btn-6" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">6</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Parque Provincial Aconcagua</h4>
-                <p class="text-xs text-gray-500">El techo de América</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 7 -->
-          <button onclick="selectStop(7)" id="stop-btn-7" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">7</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Las Cuevas</h4>
-                <p class="text-xs text-gray-500">Límite fronterizo con Chile</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
-          <!-- Stop 8 -->
-          <button onclick="selectStop(8)" id="stop-btn-8" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
-            <div class="flex items-center space-x-3">
-              <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">8</span>
-              <div>
-                <h4 class="font-bold text-vini-900 text-sm">Las Leñas</h4>
-                <p class="text-xs text-gray-500">Conexión exclusiva invernal</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
-          </button>
-
+    <!-- ========== PESTAÑA 3: RECORRIDO (PARADAS) ========== -->
+    <section id="paradas" class="tab-section py-20 bg-arena-100 hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Explorador Interactivo</h2>
+          <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
+            Estaciones y Paradas de Alta Montaña
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base mt-4">
+            Seleccioná cualquier parada de la lista para ver su información clave, descripción y altitud en nuestro visor dinámico cordillerano.
+          </p>
         </div>
 
-        <!-- Detail Viewer (Right Side) -->
-        <div class="lg:col-span-7 bg-white border border-arena-200 rounded-3xl p-6 sm:p-8 shadow-xl relative min-h-[500px] flex flex-col justify-between">
-          <div class="absolute top-4 right-4 bg-vini-50 text-vini-900 border border-vini-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-            <i data-lucide="info" class="w-3.5 h-3.5"></i> Vista Detalle
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Lista de Paradas (Lado Izquierdo) -->
+          <div class="lg:col-span-5 space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+            <button onclick="selectStop(1)" id="stop-btn-1" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-500 text-white font-bold text-sm flex items-center justify-center shadow-md">1</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Terminal Inteligente de Mendoza</h4>
+                  <p class="text-xs text-gray-500">Punto de Partida (Origen)</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(2)" id="stop-btn-2" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">2</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Dique Potrerillos</h4>
+                  <p class="text-xs text-gray-500">Emblemático espejo de agua</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(3)" id="stop-btn-3" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">3</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Valle de Uspallata</h4>
+                  <p class="text-xs text-gray-500">Punto clave de descanso e historia</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(4)" id="stop-btn-4" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">4</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Penitentes</h4>
+                  <p class="text-xs text-gray-500">Paisajes de nieve y sendas de roca</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(5)" id="stop-btn-5" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">5</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Puente del Inca</h4>
+                  <p class="text-xs text-gray-500">Monumento natural y termas</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(6)" id="stop-btn-6" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">6</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Parque Provincial Aconcagua</h4>
+                  <p class="text-xs text-gray-500">El techo de América</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(7)" id="stop-btn-7" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">7</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Las Cuevas</h4>
+                  <p class="text-xs text-gray-500">Límite fronterizo con Chile</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
+
+            <button onclick="selectStop(8)" id="stop-btn-8" class="w-full text-left p-4 rounded-xl border transition-all duration-300 flex items-center justify-between stop-card bg-white border-arena-200 shadow-sm hover:border-vini-400">
+              <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-full bg-vini-100 text-vini-800 font-bold text-sm flex items-center justify-center">8</span>
+                <div>
+                  <h4 class="font-bold text-vini-900 text-sm">Las Leñas</h4>
+                  <p class="text-xs text-gray-500">Conexión exclusiva invernal</p>
+                </div>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-vini-500"></i>
+            </button>
           </div>
 
-          <div class="space-y-6">
-            <!-- Dynamic Image Placeholder using robust SVGs themed by location -->
-            <div class="w-full h-56 rounded-2xl overflow-hidden bg-vini-900 relative">
-              <div id="viewer-svg" class="absolute inset-0 w-full h-full">
-                <!-- Will be dynamically updated by Javascript -->
-              </div>
-              <div class="absolute bottom-4 left-4 bg-vini-900/80 backdrop-blur-md px-4 py-2 rounded-xl text-white">
-                <span id="viewer-altitude" class="text-xs font-semibold uppercase tracking-widest text-pink-200">Altitud: 750 msnm</span>
-                <h3 id="viewer-subtitle" class="text-lg font-serif font-bold text-white">Gran Mendoza</h3>
-              </div>
+          <!-- Visor Detallado (Lado Derecho) -->
+          <div class="lg:col-span-7 bg-white border border-arena-200 rounded-3xl p-6 sm:p-8 shadow-xl relative min-h-[500px] flex flex-col justify-between">
+            <div class="absolute top-4 right-4 bg-vini-50 text-vini-900 border border-vini-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+              <i data-lucide="info" class="w-3.5 h-3.5"></i> Vista Detalle
             </div>
 
-            <!-- Stop Text -->
-            <div class="space-y-3">
-              <h3 id="viewer-title" class="text-2xl sm:text-3xl font-serif font-extrabold text-vini-900">
-                Terminal Inteligente de Mendoza (TIM)
-              </h3>
-              <p id="viewer-desc" class="text-gray-700 leading-relaxed text-sm sm:text-base">
-                Punto de partida y centro neurálgico de todo el trayecto de alta montaña. Ofrece andenes de fácil acceso, wifi integrado gratis, seguridad las 24 horas y accesibilidad total.
-              </p>
-            </div>
+            <div class="space-y-6">
+              <div class="w-full h-56 rounded-2xl overflow-hidden bg-vini-900 relative">
+                <div id="viewer-svg" class="absolute inset-0 w-full h-full"></div>
+                <div class="absolute bottom-4 left-4 bg-vini-900/80 backdrop-blur-md px-4 py-2 rounded-xl text-white">
+                  <span id="viewer-altitude" class="text-xs font-semibold uppercase tracking-widest text-pink-200">Altitud: 750 msnm</span>
+                  <h3 id="viewer-subtitle" class="text-lg font-serif font-bold text-white">Gran Mendoza</h3>
+                </div>
+              </div>
 
-            <!-- Real-time dynamic stats cards for the stop -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-arena-100">
-              <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Tipo de Parada</p>
-                <p id="viewer-type" class="text-sm font-extrabold text-vini-900 mt-1">Cabecera de Línea</p>
-              </div>
-              <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Distancia Desde TIM</p>
-                <p id="viewer-distance" class="text-sm font-extrabold text-vini-900 mt-1">0 km (Origen)</p>
-              </div>
-              <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Estado Climático</p>
-                <p id="viewer-climate" class="text-sm font-extrabold text-emerald-600 mt-1 flex items-center gap-1">
-                  <i data-lucide="sun" class="w-4 h-4"></i> Despejado
+              <div class="space-y-3">
+                <h3 id="viewer-title" class="text-2xl sm:text-3xl font-serif font-extrabold text-vini-900">
+                  Terminal Inteligente de Mendoza (TIM)
+                </h3>
+                <p id="viewer-desc" class="text-gray-700 leading-relaxed text-sm sm:text-base">
+                  Punto de partida y centro neurálgico de todo el trayecto de alta montaña. Ofrece andenes de fácil acceso, wifi integrado gratis, seguridad las 24 horas y accesibilidad total.
                 </p>
               </div>
-            </div>
-          </div>
 
-          <div class="pt-6 mt-6 border-t border-arena-100 flex flex-col sm:flex-row gap-3">
-            <button onclick="document.getElementById('horarios').scrollIntoView();" class="flex-1 py-3 bg-vini-500 hover:bg-vini-600 text-white font-bold text-sm rounded-xl transition text-center shadow-md">
-              Ver Horarios de paso
-            </button>
-            <button onclick="abrirAsistenciaModal()" class="flex-1 py-3 bg-arena-100 hover:bg-arena-200 text-vini-900 border border-vini-200 font-bold text-sm rounded-xl transition text-center">
-              Coordinar Asistencia en esta parada
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MAP & SCHEME SECTION -->
-  <section id="mapa" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Text details (Left) -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="inline-flex items-center space-x-2 bg-pink-50 border border-pink-200 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-vini-700">
-            <i data-lucide="navigation-2" class="w-3.5 h-3.5"></i>
-            <span>Trazado del Recorrido</span>
-          </div>
-
-          <h2 class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 leading-tight">
-            Mapa de Ruta y Conexión de Alta Montaña
-          </h2>
-
-          <p class="text-gray-600 leading-relaxed">
-            El servicio de Alta Montaña conecta la ciudad de Mendoza con los principales puntos turísticos y naturales de la cordillera, facilitando el acceso a destinos de gran valor paisajístico, histórico y recreativo.
-          </p>
-
-          <!-- Core details Card -->
-          <div class="bg-arena-50 border border-arena-200 p-6 rounded-2xl space-y-4">
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Origen Principal</p>
-                <p class="text-sm font-extrabold text-vini-900">Terminal Inteligente de Mendoza</p>
-                <p class="text-xs text-gray-600">Juan B. Alberdi s/n, Guaymallén, Mendoza.</p>
+              <!-- Ficha técnica en tiempo real -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-arena-100">
+                <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
+                  <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Tipo de Parada</p>
+                  <p id="viewer-type" class="text-sm font-extrabold text-vini-900 mt-1">Cabecera de Línea</p>
+                </div>
+                <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
+                  <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Distancia Desde TIM</p>
+                  <p id="viewer-distance" class="text-sm font-extrabold text-vini-900 mt-1">0 km (Origen)</p>
+                </div>
+                <div class="bg-arena-50 p-4 rounded-xl border border-arena-200">
+                  <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Estado Climático</p>
+                  <p id="viewer-climate" class="text-sm font-extrabold text-emerald-600 mt-1 flex items-center gap-1">
+                    <i data-lucide="sun" class="w-4 h-4 text-vini-500 inline mr-1"></i> Despejado
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
-                <i data-lucide="route" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Trayecto de Ruta 7</p>
-                <p class="text-sm font-semibold text-gray-700">TIM → Potrerillos → Uspallata → Penitentes → Puente del Inca → Parque Provincial Aconcagua → Las Cuevas.</p>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-3">
-              <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
-                <i data-lucide="snowflake" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Desvío Especial Las Leñas</p>
-                <p class="text-sm font-semibold text-gray-700">TIM Mendoza → San Rafael / Malargüe → Las Leñas.</p>
-              </div>
+            <div class="pt-6 mt-6 border-t border-arena-100 flex flex-col sm:flex-row gap-3">
+              <button onclick="showSection('horarios')" class="flex-1 py-3 bg-vini-500 hover:bg-vini-600 text-white font-bold text-sm rounded-xl transition text-center shadow-md">
+                Ver Horarios de paso
+              </button>
+              <button onclick="abrirAsistenciaModal()" class="flex-1 py-3 bg-arena-100 hover:bg-arena-200 text-vini-900 border border-vini-200 font-bold text-sm rounded-xl transition text-center">
+                Coordinar Asistencia en esta parada
+              </button>
             </div>
           </div>
         </div>
-
-        <!-- Visual interactive Route Schema (Right) -->
-        <div class="lg:col-span-7 space-y-4">
-          <!-- Embedded Dynamic Route Schematic Design Canvas/SVG -->
-          <div class="bg-arena-100 border border-arena-200 rounded-3xl p-6 shadow-md relative overflow-hidden">
-            <h4 class="text-sm font-bold text-vini-900 mb-6 flex items-center gap-2">
-              <i data-lucide="git-commit" class="w-5 h-5 text-vini-500"></i> Esquema de Red TIM Interurbano
-            </h4>
-
-            <div class="relative min-h-[350px] w-full flex items-center justify-center">
-              <!-- Inline interactive SVG map representation -->
-              <svg viewBox="0 0 500 300" class="w-full h-auto max-w-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background decorative lines representing mountains -->
-                <path d="M 50 250 L 120 180 L 180 220 L 250 150 L 350 210 L 450 120" stroke="#ebdccf" stroke-width="2" />
-                <path d="M 20 280 L 150 190 L 280 260 L 480 140" stroke="#ebdccf" stroke-width="1.5" stroke-dasharray="4 4" />
-
-                <!-- Route lines -->
-                <!-- Route Line Mendoza to Las Cuevas -->
-                <path d="M 60 220 L 150 200 L 240 180 L 310 150 L 370 120 L 430 90 L 470 70" stroke="#8c1d32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Route Line to Las Leñas (Desvío) -->
-                <path d="M 150 200 L 180 240 L 220 260 L 300 280" stroke="#c084fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" />
-
-                <!-- Node Points with interaction tooltips on hover -->
-                <!-- Mendoza TIM -->
-                <circle cx="60" cy="220" r="8" fill="#8c1d32" class="cursor-pointer hover:r-12 transition" onclick="selectStop(1)" />
-                <text x="35" y="240" fill="#3a070f" font-size="9" font-family="Inter" font-weight="bold">TIM Mendoza</text>
-
-                <!-- Potrerillos -->
-                <circle cx="150" cy="200" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="selectStop(2)" />
-                <text x="135" y="190" fill="#3a070f" font-size="8" font-family="Inter">Potrerillos</text>
-
-                <!-- Uspallata -->
-                <circle cx="240" cy="180" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="selectStop(3)" />
-                <text x="225" y="170" fill="#3a070f" font-size="8" font-family="Inter">Uspallata</text>
-
-                <!-- Penitentes -->
-                <circle cx="310" cy="150" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="selectStop(4)" />
-                <text x="295" y="140" fill="#3a070f" font-size="8" font-family="Inter">Penitentes</text>
-
-                <!-- Puente del Inca -->
-                <circle cx="370" cy="120" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="selectStop(5)" />
-                <text x="355" y="110" fill="#3a070f" font-size="8" font-family="Inter">Pte. Inca</text>
-
-                <!-- Aconcagua -->
-                <circle cx="430" cy="90" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="selectStop(6)" />
-                <text x="410" y="80" fill="#3a070f" font-size="8" font-family="Inter" font-weight="bold">Aconcagua</text>
-
-                <!-- Las Cuevas -->
-                <circle cx="470" cy="70" r="7" fill="#dc2626" class="cursor-pointer hover:r-11 transition" onclick="selectStop(7)" />
-                <text x="440" y="60" fill="#3a070f" font-size="8" font-family="Inter" font-weight="bold">Las Cuevas</text>
-
-                <!-- Las Leñas (Desvío) -->
-                <circle cx="300" cy="280" r="6" fill="#a855f7" class="cursor-pointer hover:r-10 transition" onclick="selectStop(8)" />
-                <text x="280" y="270" fill="#a855f7" font-size="8" font-family="Inter" font-weight="bold">Las Leñas</text>
-              </svg>
-            </div>
-
-            <!-- Legends -->
-            <div class="flex flex-wrap items-center justify-between gap-4 mt-4 pt-4 border-t border-arena-200 text-xs text-gray-600">
-              <div class="flex items-center gap-2">
-                <span class="inline-block w-4 h-1.5 bg-vini-500 rounded-full"></span>
-                <span>Recorrido Troncal Nac. 7</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="inline-block w-4 h-1.5 bg-purple-500 border-dashed rounded-full"></span>
-                <span>Desvío Invernal Las Leñas</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="inline-block w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse"></span>
-                <span>Alerta Clima OK</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TABLE OF SCHEDULES / HORARIOS -->
-  <section id="horarios" class="py-20 bg-arena-50 border-y border-arena-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Consultas Frecuentes</h2>
-        <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
-          Horarios del Servicio Interurbano
-        </p>
-        <p class="text-gray-600 text-sm sm:text-base mt-4">
-          Salidas diarias programadas y en tiempo real desde los andenes principales de TIM hacia los parajes de la Cordillera.
-        </p>
-      </div>
-
-      <!-- Live Search & Filtering tools -->
-      <div class="bg-white border border-arena-200 p-6 rounded-3xl mb-8 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div class="relative w-full md:max-w-md">
-          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-            <i data-lucide="search" class="w-5 h-5"></i>
-          </span>
-          <input type="text" id="scheduleSearch" onkeyup="filterSchedules()" placeholder="Buscar destino, micro o estado..." class="w-full pl-10 pr-4 py-3 rounded-xl border border-arena-200 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
-        </div>
-
-        <div class="flex flex-wrap gap-2 w-full md:w-auto justify-end">
-          <button onclick="filterByDest('all')" class="px-4 py-2 bg-vini-500 text-white rounded-lg text-xs font-bold shadow-md hover:bg-vini-600 transition filter-btn">Todos los micros</button>
-          <button onclick="filterByDest('Las Cuevas')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Las Cuevas</button>
-          <button onclick="filterByDest('Uspallata')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Uspallata</button>
-          <button onclick="filterByDest('Puente del Inca')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Puente del Inca</button>
-        </div>
-      </div>
-
-      <!-- Schedule Table Responsive -->
-      <div class="bg-white border border-arena-200 rounded-3xl shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse" id="schedulesTable">
-            <thead>
-              <tr class="bg-vini-900 text-white text-xs uppercase tracking-wider">
-                <th class="p-5 font-semibold">Micro</th>
-                <th class="p-5 font-semibold">Horario de Salida</th>
-                <th class="p-5 font-semibold">Destino de Referencia</th>
-                <th class="p-5 font-semibold">Frecuencia habitual</th>
-                <th class="p-5 font-semibold">Estado de servicio</th>
-                <th class="p-5 font-semibold text-right">Pasaje / Reserva</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-arena-100 text-sm">
-              <!-- Micro 1 -->
-              <tr class="hover:bg-vini-50/40 transition">
-                <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
-                  <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Andesmar (01)
-                </td>
-                <td class="p-5 font-semibold text-gray-700">05:55 hs</td>
-                <td class="p-5 text-gray-800 font-medium">Las Cuevas / Alta Montaña</td>
-                <td class="p-5 text-gray-500">Según destino (Diario)</td>
-                <td class="p-5">
-                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Disponible
-                  </span>
-                </td>
-                <td class="p-5 text-right">
-                  <button onclick="abrirReservaModal('Andesmar (01) - 05:55 hs', 'Las Cuevas')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
-                    Reservar
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Micro 2 -->
-              <tr class="hover:bg-vini-50/40 transition">
-                <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
-                  <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Cata Internacional (04)
-                </td>
-                <td class="p-5 font-semibold text-gray-700">07:00 hs</td>
-                <td class="p-5 text-gray-800 font-medium">Uspallata / Puente del Inca</td>
-                <td class="p-5 text-gray-500">Según destino (L a D)</td>
-                <td class="p-5">
-                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span> A horario
-                  </span>
-                </td>
-                <td class="p-5 text-right">
-                  <button onclick="abrirReservaModal('Cata Internacional (04) - 07:00 hs', 'Uspallata / Puente del Inca')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
-                    Reservar
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Micro 3 -->
-              <tr class="hover:bg-vini-50/40 transition">
-                <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
-                  <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Buttini (12)
-                </td>
-                <td class="p-5 font-semibold text-gray-700">10:15 hs</td>
-                <td class="p-5 text-gray-800 font-medium">Las Cuevas</td>
-                <td class="p-5 text-gray-500">Frecuencia Diaria</td>
-                <td class="p-5">
-                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Disponible
-                  </span>
-                </td>
-                <td class="p-5 text-right">
-                  <button onclick="abrirReservaModal('Buttini (12) - 10:15 hs', 'Las Cuevas')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
-                    Reservar
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Micro 4 -->
-              <tr class="hover:bg-vini-50/40 transition">
-                <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
-                  <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Iselin (02)
-                </td>
-                <td class="p-5 font-semibold text-gray-700">15:30 hs</td>
-                <td class="p-5 text-gray-800 font-medium">Puente del Inca</td>
-                <td class="p-5 text-gray-500">Frecuencia Diaria</td>
-                <td class="p-5">
-                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span> Últimos lugares
-                  </span>
-                </td>
-                <td class="p-5 text-right">
-                  <button onclick="abrirReservaModal('Iselin (02) - 15:30 hs', 'Puente del Inca')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
-                    Reservar
-                  </button>
-                </td>
-              </tr>
-
-              <!-- Micro 5 -->
-              <tr class="hover:bg-vini-50/40 transition">
-                <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
-                  <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Andesmar Especial (02)
-                </td>
-                <td class="p-5 font-semibold text-gray-700">20:00 hs</td>
-                <td class="p-5 text-gray-800 font-medium">Uspallata</td>
-                <td class="p-5 text-gray-500">Refuerzo Nocturno</td>
-                <td class="p-5">
-                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span> A horario
-                  </span>
-                </td>
-                <td class="p-5 text-right">
-                  <button onclick="abrirReservaModal('Andesmar Especial (02) - 20:00 hs', 'Uspallata')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
-                    Reservar
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Footnote warning notice -->
-      <div class="mt-8 bg-vini-50 border border-vini-200 p-6 rounded-2xl flex flex-col sm:flex-row gap-4 items-start">
-        <div class="p-2 bg-vini-200 text-vini-900 rounded-lg">
-          <i data-lucide="alert-triangle" class="w-5 h-5"></i>
-        </div>
-        <div class="space-y-1">
-          <h5 class="text-sm font-bold text-vini-900">Aclaración sobre la operatividad del servicio:</h5>
-          <p class="text-xs text-gray-600 leading-relaxed">
-            La frecuencia del servicio varía según el destino, la temporada de nieve, el estado de las rutas internacionales y la disponibilidad de la empresa operadora correspondiente. Los horarios son de referencia técnica y pueden sufrir variaciones imprevistas por factores climáticos o viales en los tramos cordilleranos más elevados.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACCESIBILIDAD / ACCESSIBILITY -->
-  <section id="accesibilidad" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">TIM para todos</h2>
-        <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
-          Características de Accesibilidad
-        </p>
-        <p class="text-gray-600 text-sm sm:text-base mt-4">
-          El servicio de Alta Montaña de TIM está diseñado con un fuerte compromiso inclusivo, asegurando que todas las personas viajen de forma segura, autónoma y cómoda.
-        </p>
-      </div>
-
-      <!-- 7 Cards of Accessibility Features -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- 1. Rampas -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="scaling" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Rampas de acceso</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Las unidades de transporte y plataformas de TIM poseen rampas plegables de alta tracción para facilitar el ingreso y egreso de personas con movilidad reducida.
-            </p>
-          </div>
-        </div>
-
-        <!-- 2. Espacio Silla de Ruedas -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="accessibility" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Espacios para silla de ruedas</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Cada unidad interurbana cuenta con sectores especiales reservados con cinturones de sujeción anclados al chasis para garantizar viajes seguros en la pendiente.
-            </p>
-          </div>
-        </div>
-
-        <!-- 3. Baño para discapacitados -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="toggle-left" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Baños Adaptados</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Las cabinas de baño de la estación cabecera y paradas troncales cuentan con barras de apoyo metálicas fijas, alarmas de pánico y espacio óptimo de giro.
-            </p>
-          </div>
-        </div>
-
-        <!-- 4. Tipografía apta / Braille -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="languages" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Tipografía & Braille</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Cartelería diseñada con tipografía de alto contraste legible desde la distancia, y placas de sistema Braille oficial en los pasamanos de accesos clave.
-            </p>
-          </div>
-        </div>
-
-        <!-- 5. Información sonora -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="megaphone" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Información Sonora Activa</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Altavoces de alta fidelidad emiten avisos frecuentes y claros de partidas, demoras por condiciones de clima en cordillera, andenes y asistencia.
-            </p>
-          </div>
-        </div>
-
-        <!-- 6. Contraste visual -->
-        <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
-          <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
-            <i data-lucide="sparkles" class="w-6 h-6"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="font-bold text-vini-900">Contraste Visual Diseñado</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Nuestros esquemas de interfaz web y de tótems en terminal cumplen los parámetros de contraste cromático estricto para baja visión.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Action call for personalization assistance request -->
-      <div class="mt-16 bg-gradient-to-r from-vini-900 to-vini-750 text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col lg:flex-row justify-between items-center gap-8">
-        <div class="space-y-3 max-w-2xl text-center lg:text-left">
-          <div class="inline-block bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-pink-200 uppercase tracking-wider">Servicio de Acompañamiento</div>
-          <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white">¿Necesitás asistencia personalizada?</h3>
-          <p class="text-pink-100 text-sm sm:text-base leading-relaxed">
-            Coordiná tu viaje con anticipación y un agente de TIM te esperará en plataforma para ayudarte en el abordaje, el control de equipaje y tu ubicación.
-          </p>
-        </div>
-        <button onclick="abrirAsistenciaModal()" class="px-8 py-4 bg-white text-vini-900 hover:bg-pink-100 font-extrabold text-sm sm:text-base rounded-xl transition shadow-lg shrink-0">
-          Solicitar Asistencia Ahora
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT / INFO EXTRA -->
-  <section id="contacto" class="py-20 bg-arena-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        <!-- Contact forms and ticket simulador -->
-        <div class="lg:col-span-7 bg-white border border-arena-200 p-8 rounded-3xl shadow-lg space-y-6">
-          <h3 class="text-2xl font-serif font-bold text-vini-900">Envianos tu consulta o sugerencia</h3>
-          <p class="text-sm text-gray-600">Comunicate con las oficinas centrales del Servicio de Alta Montaña. Te responderemos en un plazo menor a 12 horas.</p>
+    <!-- ========== PESTAÑA 4: MAPA ========== -->
+    <section id="mapa" class="tab-section py-20 bg-white hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Nombre Completo</label>
-                <input type="text" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Correo Electrónico</label>
-                <input type="email" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
-              </div>
+          <!-- Textos descriptivos (Lado Izquierdo) -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-pink-50 border border-pink-200 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-vini-700">
+              <i data-lucide="navigation-2" class="w-3.5 h-3.5"></i>
+              <span>Trazado del Recorrido</span>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Asunto de consulta</label>
-              <select class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm text-gray-700">
-                <option>Estado de Ruta 7 y Operatividad</option>
-                <option>Reservas y Tarifas Especiales</option>
-                <option>Asistencia de Accesibilidad</option>
-                <option>Reclamos de Equipaje o Servicio</option>
-              </select>
-            </div>
+            <h2 class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 leading-tight">
+              Mapa de Ruta y Conexión de Alta Montaña
+            </h2>
 
-            <div>
-              <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Mensaje o Detalle</label>
-              <textarea required rows="4" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Escribí aquí tu consulta sobre horarios, equipaje, etc..."></button></textarea>
-            </div>
+            <p class="text-gray-600 leading-relaxed">
+              El servicio de Alta Montaña conecta la ciudad de Mendoza con los principales puntos turísticos y naturales de la cordillera, facilitando el acceso a destinos de gran valor paisajístico, histórico y recreativo.
+            </p>
 
-            <button type="submit" class="w-full py-3.5 bg-vini-500 hover:bg-vini-600 text-white font-bold rounded-xl transition text-sm shadow-md">
-              Enviar Mensaje de Consulta
-            </button>
-          </form>
-        </div>
-
-        <!-- Extra Info and FAQ cards (Right) -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="bg-vini-900 text-white p-8 rounded-3xl shadow-lg space-y-4">
-            <h4 class="text-xl font-serif font-bold text-white">Central Telefónica de Alta Montaña</h4>
-            <p class="text-xs text-pink-200">Asistencia exclusiva para pasajeros del corredor cordillerano.</p>
-            
-            <div class="space-y-4 pt-4 text-sm border-t border-white/10">
-              <div class="flex items-center space-x-3">
-                <i data-lucide="phone" class="w-5 h-5 text-pink-300"></i>
+            <!-- Datos Clave de Ruta -->
+            <div class="bg-arena-50 border border-arena-200 p-6 rounded-2xl space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
                 <div>
-                  <p class="text-xs text-gray-400">Atención telefónica</p>
-                  <p class="font-bold">0261 476 5875</p>
+                  <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Origen Principal</p>
+                  <p class="text-sm font-extrabold text-vini-900">Terminal Inteligente de Mendoza</p>
+                  <p class="text-xs text-gray-600">Juan B. Alberdi s/n, Guaymallén, Mendoza.</p>
                 </div>
               </div>
 
-              <div class="flex items-center space-x-3">
-                <i data-lucide="clock" class="w-5 h-5 text-pink-300"></i>
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
+                  <i data-lucide="route" class="w-5 h-5"></i>
+                </div>
                 <div>
-                  <p class="text-xs text-gray-400">Horario de Atención Central</p>
-                  <p class="font-semibold">Lunes a Domingos, las 24 horas</p>
+                  <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Trayecto de Ruta 7</p>
+                  <p class="text-sm font-semibold text-gray-700">TIM → Potrerillos → Uspallata → Penitentes → Puente del Inca → Parque Provincial Aconcagua → Las Cuevas.</p>
                 </div>
               </div>
 
-              <div class="flex items-center space-x-3">
-                <i data-lucide="map-pin" class="w-5 h-5 text-pink-300"></i>
+              <div class="flex items-start space-x-3">
+                <div class="p-2 bg-vini-50 rounded-lg text-vini-600 mt-1">
+                  <i data-lucide="snowflake" class="w-5 h-5"></i>
+                </div>
                 <div>
-                  <p class="text-xs text-gray-400">Oficina Principal de Informes</p>
-                  <p class="font-semibold">Andén 12, Terminal de Mendoza</p>
+                  <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Desvío Especial Las Leñas</p>
+                  <p class="text-sm font-semibold text-gray-700">TIM Mendoza → San Rafael / Malargüe → Las Leñas.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Quick FAQ Accordion -->
-          <div class="bg-white border border-arena-200 p-6 rounded-3xl space-y-4 shadow-sm">
-            <h4 class="text-lg font-serif font-bold text-vini-900">Preguntas Frecuentes</h4>
-            
-            <div class="space-y-3 text-xs">
-              <div class="p-3 bg-arena-50 rounded-xl border border-arena-200">
-                <p class="font-bold text-vini-900 mb-1">¿Qué pasa si cierran el Paso Internacional?</p>
-                <p class="text-gray-600">El micro circulará únicamente hasta la última parada segura habilitada por Gendarmería Nacional (habitualmente Uspallata o Puente del Inca).</p>
+          <!-- Esquema interactivo visual (Lado Derecho) -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="bg-arena-100 border border-arena-200 rounded-3xl p-6 shadow-md relative overflow-hidden">
+              <h4 class="text-sm font-bold text-vini-900 mb-6 flex items-center gap-2">
+                <i data-lucide="git-commit" class="w-5 h-5 text-vini-500"></i> Esquema de Red TIM Interurbano
+              </h4>
+
+              <div class="relative min-h-[350px] w-full flex items-center justify-center">
+                <svg viewBox="0 0 500 300" class="w-full h-auto max-w-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Fondos decorativos de cordones montañosos -->
+                  <path d="M 50 250 L 120 180 L 180 220 L 250 150 L 350 210 L 450 120" stroke="#ebdccf" stroke-width="2" />
+                  <path d="M 20 280 L 150 190 L 280 260 L 480 140" stroke="#ebdccf" stroke-width="1.5" stroke-dasharray="4 4" />
+
+                  <!-- Línea de trazado principal de la Ruta 7 -->
+                  <path d="M 60 220 L 150 200 L 240 180 L 310 150 L 370 120 L 430 90 L 470 70" stroke="#8c1d32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- Línea del desvío hacia Las Leñas -->
+                  <path d="M 150 200 L 180 240 L 220 260 L 300 280" stroke="#c084fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" />
+
+                  <!-- Nodos interactivos de paradas -->
+                  <circle cx="60" cy="220" r="8" fill="#8c1d32" class="cursor-pointer hover:r-12 transition" onclick="showSection('paradas'); selectStop(1);" />
+                  <text x="35" y="240" fill="#3a070f" font-size="9" font-family="Inter" font-weight="bold">TIM Mendoza</text>
+
+                  <circle cx="150" cy="200" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(2);" />
+                  <text x="135" y="190" fill="#3a070f" font-size="8" font-family="Inter">Potrerillos</text>
+
+                  <circle cx="240" cy="180" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(3);" />
+                  <text x="225" y="170" fill="#3a070f" font-size="8" font-family="Inter">Uspallata</text>
+
+                  <circle cx="310" cy="150" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(4);" />
+                  <text x="295" y="140" fill="#3a070f" font-size="8" font-family="Inter">Penitentes</text>
+
+                  <circle cx="370" cy="120" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(5);" />
+                  <text x="355" y="110" fill="#3a070f" font-size="8" font-family="Inter">Pte. Inca</text>
+
+                  <circle cx="430" cy="90" r="6" fill="#8c1d32" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(6);" />
+                  <text x="410" y="80" fill="#3a070f" font-size="8" font-family="Inter" font-weight="bold">Aconcagua</text>
+
+                  <circle cx="470" cy="70" r="7" fill="#dc2626" class="cursor-pointer hover:r-11 transition" onclick="showSection('paradas'); selectStop(7);" />
+                  <text x="440" y="60" fill="#3a070f" font-size="8" font-family="Inter" font-weight="bold">Las Cuevas</text>
+
+                  <circle cx="300" cy="280" r="6" fill="#a855f7" class="cursor-pointer hover:r-10 transition" onclick="showSection('paradas'); selectStop(8);" />
+                  <text x="280" y="270" fill="#a855f7" font-size="8" font-family="Inter" font-weight="bold">Las Leñas</text>
+                </svg>
               </div>
 
-              <div class="p-3 bg-arena-50 rounded-xl border border-arena-200">
-                <p class="font-bold text-vini-900 mb-1">¿Se paga adicional por silla de ruedas o equipaje extra?</p>
-                <p class="text-gray-600">No. Las sillas de ruedas, andadores y equipamiento de asistencia viajan con cargo de tarifa cero asegurada por reglamentación de TIM.</p>
+              <!-- Referencias -->
+              <div class="flex flex-wrap items-center justify-between gap-4 mt-4 pt-4 border-t border-arena-200 text-xs text-gray-600">
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-4 h-1.5 bg-vini-500 rounded-full"></span>
+                  <span>Recorrido Troncal Nac. 7</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-4 h-1.5 bg-purple-500 border-dashed rounded-full"></span>
+                  <span>Desvío Invernal Las Leñas</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-block w-2.5 h-2.5 bg-emerald-500 rounded-full"></span>
+                  <span>Alerta Clima OK</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
+    <!-- ========== PESTAÑA 5: HORARIOS ========== -->
+    <section id="horarios" class="tab-section py-20 bg-arena-50 border-y border-arena-200 hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">Salidas Programadas</h2>
+          <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
+            Horarios del Servicio Interurbano
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base mt-4">
+            Salidas diarias programadas y en tiempo real desde los andenes principales de TIM hacia los parajes de la Cordillera.
+          </p>
+        </div>
+
+        <!-- Barra de búsqueda y filtrado interactivo -->
+        <div class="bg-white border border-arena-200 p-6 rounded-3xl mb-8 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div class="relative w-full md:max-w-md">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+              <i data-lucide="search" class="w-5 h-5"></i>
+            </span>
+            <input type="text" id="scheduleSearch" onkeyup="filterSchedules()" placeholder="Buscar destino, micro o estado..." class="w-full pl-10 pr-4 py-3 rounded-xl border border-arena-200 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
+          </div>
+
+          <div class="flex flex-wrap gap-2 w-full md:w-auto justify-end">
+            <button onclick="filterByDest('all')" class="px-4 py-2 bg-vini-500 text-white rounded-lg text-xs font-bold shadow-md hover:bg-vini-600 transition filter-btn">Todos los micros</button>
+            <button onclick="filterByDest('Las Cuevas')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Las Cuevas</button>
+            <button onclick="filterByDest('Uspallata')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Uspallata</button>
+            <button onclick="filterByDest('Puente del Inca')" class="px-4 py-2 bg-arena-100 text-vini-900 rounded-lg text-xs font-bold hover:bg-arena-200 transition filter-btn">Puente del Inca</button>
+          </div>
+        </div>
+
+        <!-- Tabla Responsiva de Horarios -->
+        <div class="bg-white border border-arena-200 rounded-3xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse" id="schedulesTable">
+              <thead>
+                <tr class="bg-vini-900 text-white text-xs uppercase tracking-wider">
+                  <th class="p-5 font-semibold">Micro</th>
+                  <th class="p-5 font-semibold">Horario de Salida</th>
+                  <th class="p-5 font-semibold">Destino de Referencia</th>
+                  <th class="p-5 font-semibold">Frecuencia habitual</th>
+                  <th class="p-5 font-semibold">Estado de servicio</th>
+                  <th class="p-5 font-semibold text-right">Pasaje / Reserva</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-arena-100 text-sm">
+                <!-- Micro 1 -->
+                <tr class="hover:bg-vini-50/40 transition">
+                  <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
+                    <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Andesmar (01)
+                  </td>
+                  <td class="p-5 font-semibold text-gray-700">05:55 hs</td>
+                  <td class="p-5 text-gray-800 font-medium">Las Cuevas / Alta Montaña</td>
+                  <td class="p-5 text-gray-500">Según destino (Diario)</td>
+                  <td class="p-5">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Disponible
+                    </span>
+                  </td>
+                  <td class="p-5 text-right">
+                    <button onclick="abrirReservaModal('Andesmar (01) - 05:55 hs', 'Las Cuevas')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
+                      Reservar
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Micro 2 -->
+                <tr class="hover:bg-vini-50/40 transition">
+                  <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
+                    <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Cata Internacional (04)
+                  </td>
+                  <td class="p-5 font-semibold text-gray-700">07:00 hs</td>
+                  <td class="p-5 text-gray-800 font-medium">Uspallata / Puente del Inca</td>
+                  <td class="p-5 text-gray-500">Según destino (L a D)</td>
+                  <td class="p-5">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span> A horario
+                    </span>
+                  </td>
+                  <td class="p-5 text-right">
+                    <button onclick="abrirReservaModal('Cata Internacional (04) - 07:00 hs', 'Uspallata / Puente del Inca')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
+                      Reservar
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Micro 3 -->
+                <tr class="hover:bg-vini-50/40 transition">
+                  <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
+                    <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Buttini (12)
+                  </td>
+                  <td class="p-5 font-semibold text-gray-700">10:15 hs</td>
+                  <td class="p-5 text-gray-800 font-medium">Las Cuevas</td>
+                  <td class="p-5 text-gray-500">Frecuencia Diaria</td>
+                  <td class="p-5">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Disponible
+                    </span>
+                  </td>
+                  <td class="p-5 text-right">
+                    <button onclick="abrirReservaModal('Buttini (12) - 10:15 hs', 'Las Cuevas')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
+                      Reservar
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Micro 4 -->
+                <tr class="hover:bg-vini-50/40 transition">
+                  <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
+                    <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Iselin (02)
+                  </td>
+                  <td class="p-5 font-semibold text-gray-700">15:30 hs</td>
+                  <td class="p-5 text-gray-800 font-medium">Puente del Inca</td>
+                  <td class="p-5 text-gray-500">Frecuencia Diaria</td>
+                  <td class="p-5">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span> Últimos lugares
+                    </span>
+                  </td>
+                  <td class="p-5 text-right">
+                    <button onclick="abrirReservaModal('Iselin (02) - 15:30 hs', 'Puente del Inca')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
+                      Reservar
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Micro 5 -->
+                <tr class="hover:bg-vini-50/40 transition">
+                  <td class="p-5 font-bold text-vini-900 flex items-center gap-2">
+                    <i data-lucide="bus" class="w-4 h-4 text-vini-500"></i> Andesmar Especial (02)
+                  </td>
+                  <td class="p-5 font-semibold text-gray-700">20:00 hs</td>
+                  <td class="p-5 text-gray-800 font-medium">Uspallata</td>
+                  <td class="p-5 text-gray-500">Refuerzo Nocturno</td>
+                  <td class="p-5">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span> A horario
+                    </span>
+                  </td>
+                  <td class="p-5 text-right">
+                    <button onclick="abrirReservaModal('Andesmar Especial (02) - 20:00 hs', 'Uspallata')" class="px-4 py-2 bg-vini-500 hover:bg-vini-600 text-white font-bold text-xs rounded-lg transition shadow-sm">
+                      Reservar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Alerta de Operatividad -->
+        <div class="mt-8 bg-vini-50 border border-vini-200 p-6 rounded-2xl flex flex-col sm:flex-row gap-4 items-start">
+          <div class="p-2 bg-vini-200 text-vini-900 rounded-lg">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div class="space-y-1">
+            <h5 class="text-sm font-bold text-vini-900">Aclaración sobre la operatividad del servicio:</h5>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              La frecuencia del servicio varía según el destino, la temporada de nieve, el estado de las rutas internacionales y la disponibilidad de la empresa operadora correspondiente. Los horarios son de referencia técnica y pueden sufrir variaciones imprevistas por factores climáticos o viales en los tramos cordilleranos más elevados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PESTAÑA 6: ACCESIBILIDAD ========== -->
+    <section id="accesibilidad" class="tab-section py-20 bg-white hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs font-bold tracking-widest text-vini-500 uppercase">TIM para todos</h2>
+          <p class="text-3xl sm:text-4xl font-serif font-extrabold text-vini-900 mt-2">
+            Características de Accesibilidad
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base mt-4">
+            El servicio de Alta Montaña de TIM está diseñado con un fuerte compromiso inclusivo, asegurando que todas las personas viajen de forma segura, autónoma y cómoda.
+          </p>
+        </div>
+
+        <!-- Grilla de Tarjetas de Inclusión -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 1. Rampas -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="scaling" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Rampas de acceso</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Las unidades de transporte y plataformas de TIM poseen rampas plegables de alta tracción para facilitar el ingreso y egreso de personas con movilidad reducida.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2. Espacio Silla de Ruedas -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="accessibility" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Espacios para silla de ruedas</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Cada unidad interurbana cuenta con sectores especiales reservados con cinturones de sujeción anclados al chasis para garantizar viajes seguros en la pendiente.
+              </p>
+            </div>
+          </div>
+
+          <!-- 3. Baño para discapacitados -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="toggle-left" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Baños Adaptados</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Las cabinas de baño de la estación cabecera y paradas troncales cuentan con barras de apoyo metálicas fijas, alarmas de pánico y espacio óptimo de giro.
+              </p>
+            </div>
+          </div>
+
+          <!-- 4. Tipografía apta / Braille -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="languages" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Tipografía & Braille</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Cartelería diseñada con tipografía de alto contraste legible desde la distancia, y placas de sistema Braille oficial en los pasamanos de accesos clave.
+              </p>
+            </div>
+          </div>
+
+          <!-- 5. Información sonora -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="megaphone" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Información Sonora Activa</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Altavoces de alta fidelidad emiten avisos frecuentes y claros de partidas, demoras por condiciones de clima en cordillera, andenes y asistencia.
+              </p>
+            </div>
+          </div>
+
+          <!-- 6. Contraste visual -->
+          <div class="p-6 bg-arena-50 border border-arena-200 rounded-2xl flex items-start space-x-4">
+            <div class="p-3 bg-vini-50 text-vini-500 rounded-xl mt-1">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-1">
+              <h4 class="font-bold text-vini-900">Contraste Visual Diseñado</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Nuestros esquemas de interfaz web y de tótems en terminal cumplen los parámetros de contraste cromático estricto para baja visión.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caja de Acción Exclusiva -->
+        <div class="mt-16 bg-gradient-to-r from-vini-900 to-vini-750 text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div class="space-y-3 max-w-2xl text-center lg:text-left">
+            <div class="inline-block bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-pink-200 uppercase tracking-wider">Servicio de Acompañamiento</div>
+            <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white">¿Necesitás asistencia personalizada?</h3>
+            <p class="text-pink-100 text-sm sm:text-base leading-relaxed">
+              Coordiná tu viaje con anticipación y un agente de TIM te esperará en plataforma para ayudarte en el abordaje, el control de equipaje y tu ubicación.
+            </p>
+          </div>
+          <button onclick="abrirAsistenciaModal()" class="px-8 py-4 bg-white text-vini-900 hover:bg-pink-100 font-extrabold text-sm sm:text-base rounded-xl transition shadow-lg shrink-0">
+            Solicitar Asistencia Ahora
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PESTAÑA 7: CONTACTO ========== -->
+    <section id="contacto" class="tab-section py-20 bg-arena-100 hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Formulario de Consulta -->
+          <div class="lg:col-span-7 bg-white border border-arena-200 p-8 rounded-3xl shadow-lg space-y-6">
+            <h3 class="text-2xl font-serif font-bold text-vini-900">Envianos tu consulta o sugerencia</h3>
+            <p class="text-sm text-gray-600">Comunicate con las oficinas centrales del Servicio de Alta Montaña. Te responderemos en un plazo menor a 12 horas.</p>
+            
+            <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Nombre Completo</label>
+                  <input type="text" id="contactNombre" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Correo Electrónico</label>
+                  <input type="email" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Asunto de consulta</label>
+                <select id="contactAsunto" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm text-gray-700">
+                  <option>Estado de Ruta 7 y Operatividad</option>
+                  <option>Reservas y Tarifas Especiales</option>
+                  <option>Asistencia de Accesibilidad</option>
+                  <option>Reclamos de Equipaje o Servicio</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Mensaje o Detalle</label>
+                <textarea required rows="4" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Escribí aquí tu consulta sobre horarios, equipaje, etc..."></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 bg-vini-500 hover:bg-vini-600 text-white font-bold rounded-xl transition text-sm shadow-md">
+                Enviar Mensaje de Consulta
+              </button>
+            </form>
+          </div>
+
+          <!-- Información y FAQs (Lado Derecho) -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-vini-900 text-white p-8 rounded-3xl shadow-lg space-y-4">
+              <h4 class="text-xl font-serif font-bold text-white">Central Telefónica de Alta Montaña</h4>
+              <p class="text-xs text-pink-200">Asistencia exclusiva para pasajeros del corredor cordillerano.</p>
+              
+              <div class="space-y-4 pt-4 text-sm border-t border-white/10">
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="phone" class="w-5 h-5 text-pink-300"></i>
+                  <div>
+                    <p class="text-xs text-gray-400">Atención telefónica</p>
+                    <p class="font-bold">0261 476 5875</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="clock" class="w-5 h-5 text-pink-300"></i>
+                  <div>
+                    <p class="text-xs text-gray-400">Horario de Atención Central</p>
+                    <p class="font-semibold">Lunes a Domingos, las 24 horas</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-pink-300"></i>
+                  <div>
+                    <p class="text-xs text-gray-400">Oficina Principal de Informes</p>
+                    <p class="font-semibold">Andén 12, Terminal de Mendoza</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Acordeón Rápido -->
+            <div class="bg-white border border-arena-200 p-6 rounded-3xl space-y-4 shadow-sm">
+              <h4 class="text-lg font-serif font-bold text-vini-900">Preguntas Frecuentes</h4>
+              
+              <div class="space-y-3 text-xs">
+                <div class="p-3 bg-arena-50 rounded-xl border border-arena-200">
+                  <p class="font-bold text-vini-900 mb-1">¿Qué pasa si cierran el Paso Internacional?</p>
+                  <p class="text-gray-600">El micro circulará únicamente hasta la última parada segura habilitada por Gendarmería Nacional (habitualmente Uspallata o Puente del Inca).</p>
+                </div>
+
+                <div class="p-3 bg-arena-50 rounded-xl border border-arena-200">
+                  <p class="font-bold text-vini-900 mb-1">¿Se paga adicional por silla de ruedas o equipaje extra?</p>
+                  <p class="text-gray-600">No. Las sillas de ruedas, andadores y equipamiento de asistencia viajan con cargo de tarifa cero asegurada por reglamentación de TIM.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA / FOOTER -->
   <footer class="bg-vini-50 text-vini-900 border-t border-vini-200 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         
-        <!-- Column 1: Brand Info -->
+        <!-- Columna 1: Información de Marca -->
         <div class="space-y-4">
-          <div class="flex items-center space-x-3">
+          <button onclick="showSection('inicio')" class="flex items-center space-x-3 text-left">
             <div class="w-10 h-10 bg-vini-500 text-white rounded-lg flex items-center justify-center font-extrabold text-xl shadow-sm">
               TIM
             </div>
             <span class="text-lg font-bold tracking-tight text-vini-900">ALTA MONTAÑA</span>
-          </div>
+          </button>
           <p class="text-xs text-vini-800 leading-relaxed max-w-xs">
             Terminal Inteligente de Mendoza. Juan B. Alberdi s/n, M5519 Guaymallén, Mendoza, Argentina.
           </p>
@@ -1125,31 +1058,31 @@
           </div>
         </div>
 
-        <!-- Column 2: Navigation links -->
-        <div class="space-y-3 text-xs">
+        <!-- Columna 2: Navegación -->
+        <div class="space-y-3 text-xs flex flex-col">
           <h4 class="font-bold text-vini-700 uppercase tracking-wider text-sm mb-1">Navegación</h4>
-          <ul class="space-y-2 text-vini-800">
-            <li><a href="#inicio" class="hover:text-vini-900 hover:underline transition">Inicio</a></li>
-            <li><a href="#servicios" class="hover:text-vini-900 hover:underline transition">Servicios</a></li>
-            <li><a href="#paradas" class="hover:text-vini-900 hover:underline transition">Alta Montaña Recorrido</a></li>
-            <li><a href="#horarios" class="hover:text-vini-900 hover:underline transition">Horarios</a></li>
-            <li><a href="#accesibilidad" class="hover:text-vini-900 hover:underline transition">Accesibilidad</a></li>
+          <ul class="space-y-2 text-vini-800 text-left">
+            <li><button onclick="showSection('inicio')" class="hover:text-vini-900 hover:underline transition">Inicio</button></li>
+            <li><button onclick="showSection('servicios')" class="hover:text-vini-900 hover:underline transition">Servicios</button></li>
+            <li><button onclick="showSection('paradas')" class="hover:text-vini-900 hover:underline transition">Alta Montaña Recorrido</button></li>
+            <li><button onclick="showSection('horarios')" class="hover:text-vini-900 hover:underline transition">Horarios</button></li>
+            <li><button onclick="showSection('accesibilidad')" class="hover:text-vini-900 hover:underline transition">Accesibilidad</button></li>
           </ul>
         </div>
 
-        <!-- Column 3: Lines of TIM services -->
+        <!-- Columna 3: Servicios -->
         <div class="space-y-3 text-xs">
           <h4 class="font-bold text-vini-700 uppercase tracking-wider text-sm mb-1">Líneas de Servicio TIM</h4>
           <ul class="space-y-2 text-vini-800">
             <li><a href="#" class="hover:text-vini-900 hover:underline transition">Larga Distancia Nacional</a></li>
-            <li class="font-bold text-vini-900"><a href="#inicio" class="hover:text-vini-900 hover:underline transition">Alta Montaña Cordillera</a></li>
+            <li class="font-bold text-vini-900"><button onclick="showSection('inicio')" class="hover:text-vini-900 hover:underline transition">Alta Montaña Cordillera</button></li>
             <li><a href="#" class="hover:text-vini-900 hover:underline transition">Ruta del Vino & Bodegas</a></li>
             <li><a href="#" class="hover:text-vini-900 hover:underline transition">Conexión Aeropuerto</a></li>
             <li><a href="#" class="hover:text-vini-900 hover:underline transition">Línea Universitaria (UNCuyo/UTN)</a></li>
           </ul>
         </div>
 
-        <!-- Column 4: Legal & Contact -->
+        <!-- Columna 4: Legal -->
         <div class="space-y-3 text-xs">
           <h4 class="font-bold text-vini-700 uppercase tracking-wider text-sm mb-1">Información Útil</h4>
           <ul class="space-y-2 text-vini-800">
@@ -1173,7 +1106,7 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC INTERACTIVE ASSISTANCE & RESERVA MODAL -->
+  <!-- MODAL DE ASISTENCIA Y RESERVA -->
   <div id="actionModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white border border-arena-200 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl relative">
       <button onclick="cerrarActionModal()" class="absolute top-4 right-4 text-gray-400 hover:text-vini-900 transition">
@@ -1182,7 +1115,7 @@
 
       <div class="text-center space-y-2">
         <div class="w-12 h-12 bg-vini-50 rounded-full flex items-center justify-center text-vini-500 mx-auto">
-          <i id="modal-icon" data-lucide="calendar" class="w-6 h-6"></i>
+          <i id="modalIcon" data-lucide="calendar" class="w-6 h-6"></i>
         </div>
         <h3 id="modal-title" class="text-xl font-serif font-bold text-vini-900">Solicitud de Reserva</h3>
         <p id="modal-subtitle" class="text-xs text-gray-500">Completá tus datos para agendar la asistencia o reserva</p>
@@ -1233,7 +1166,7 @@
     </div>
   </div>
 
-  <!-- FLOATING SUCCESS CHIP -->
+  <!-- CLAVE DE NOTIFICACIÓN DE ÉXITO (SNACKBAR) -->
   <div id="successChip" class="fixed bottom-6 right-6 bg-vini-900 border border-pink-700 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-500 z-50">
     <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0">
       <i data-lucide="check" class="w-5 h-5"></i>
@@ -1244,9 +1177,9 @@
     </div>
   </div>
 
-  <!-- SCRIPTS & INTERACTIVITY LOGIC -->
+  <!-- SCRIPT CON LA LÓGICA DE INTERACTIVIDAD -->
   <script>
-    // Paradas Data Object
+    // Objeto con la base de datos de paradas
     const paradasData = {
       1: {
         title: "Terminal Inteligente de Mendoza",
@@ -1284,7 +1217,7 @@
       3: {
         title: "Uspallata",
         subtitle: "Las Heras",
-        desc: "La localidad urbana más importante en medio del camino cordillerano. Actúa como zona primordial de descanso, hotelería, reabastecimiento y conexión vial para excursiones históricas de San Martín.",
+        desc: "La localidad urbana más importante en medio del camino cordillerano. Actúa como zona primordial de descanso, hotelería, reabastecimiento y conexión viales.",
         altitude: "Altitud: 2.000 msnm",
         type: "Estación de Descanso",
         distance: "115 km de TIM",
@@ -1314,7 +1247,7 @@
       5: {
         title: "Puente del Inca",
         subtitle: "Monumento Natural Protegido",
-        desc: "Famosa formación rocosa que conforma un puente natural bañado de sales minerales y termas naturales de tonalidad naranja y azufre. Sitio histórico bajo la protección patrimonial de Mendoza.",
+        desc: "Famosa formación rocosa que conforma un puente natural bañado de sales minerales y termas naturales de tonalidad naranja y azufre.",
         altitude: "Altitud: 2.700 msnm",
         type: "Hito Turístico",
         distance: "183 km de TIM",
@@ -1329,7 +1262,7 @@
       6: {
         title: "Parque Provincial Aconcagua",
         subtitle: "Reserva Natural - Cerro Aconcagua",
-        desc: "El punto de partida de andinistas de todo el mundo que sueñan con hacer cumbre en el Aconcagua (6.961 msnm). Cuenta con un sendero interpretativo de accesibilidad universal adaptado para todos los visitantes.",
+        desc: "El punto de partida de andinistas de todo el mundo que sueñan con hacer cumbre en el Aconcagua (6.961 msnm). Cuenta con un sendero interpretativo adaptado para todos.",
         altitude: "Altitud: 2.950 msnm",
         type: "Parque Nacional",
         distance: "185 km de TIM",
@@ -1344,7 +1277,7 @@
       7: {
         title: "Las Cuevas",
         subtitle: "Límite Fronterizo Internacional",
-        desc: "Última parada del trayecto nacional de la Ruta 7 antes de cruzar por el Túnel del Cristo Redentor hacia la República de Chile. Una localidad con mística montañera extrema y edificaciones de estilo nórdico.",
+        desc: "Última parada del trayecto nacional de la Ruta 7 antes de cruzar por el Túnel del Cristo Redentor hacia la República de Chile.",
         altitude: "Altitud: 3.150 msnm",
         type: "Frontera Terminal",
         distance: "198 km de TIM",
@@ -1360,7 +1293,7 @@
       8: {
         title: "Las Leñas",
         subtitle: "Malargüe - Conexión Invernal",
-        desc: "El complejo de esquí y deportes de invierno más importante y exclusivo de Sudamérica. Conectado por TIM de manera directa durante la temporada de invierno para asegurar el traslado de esquiadores.",
+        desc: "El complejo de esquí y deportes de invierno más importante y exclusivo de Sudamérica. Conectado por TIM de manera directa durante la temporada invernal.",
         altitude: "Altitud: 2.240 msnm",
         type: "Hito Invernal Desvío",
         distance: "340 km de TIM",
@@ -1375,14 +1308,77 @@
       }
     };
 
-    // Initialize Lucide Icons
+    // SISTEMA DE NAVEGACIÓN SIMPLE (SPA)
+    function showSection(sectionId) {
+      // 1. Ocultar todos los contenedores principales
+      const sections = ['inicio', 'servicios', 'paradas', 'mapa', 'horarios', 'accesibilidad', 'contacto'];
+      sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.classList.add('hidden');
+        }
+      });
+
+      // 2. Mostrar únicamente la pestaña seleccionada
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      // 3. Resaltar enlace activo en el menú del Navbar de escritorio
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(btn => {
+        btn.classList.remove('bg-vini-500', 'text-white', 'shadow-md');
+        btn.classList.add('text-gray-600', 'hover:text-vini-500', 'hover:bg-vini-50');
+      });
+
+      const activeNavBtn = document.getElementById(`nav-${sectionId}`);
+      if (activeNavBtn) {
+        activeNavBtn.classList.add('bg-vini-500', 'text-white', 'shadow-md');
+        activeNavBtn.classList.remove('text-gray-600', 'hover:text-vini-500', 'hover:bg-vini-50');
+      }
+
+      // 4. Resaltar enlace activo en el menú de navegación mobile
+      const mobileNavButtons = document.querySelectorAll('.mobile-nav-btn');
+      mobileNavButtons.forEach(btn => {
+        btn.classList.remove('bg-vini-50', 'text-vini-500', 'font-bold');
+        btn.classList.add('text-gray-700', 'hover:bg-vini-50', 'hover:text-vini-500');
+      });
+
+      mobileNavButtons.forEach(btn => {
+        if (btn.getAttribute('onclick').includes(`'${sectionId}'`)) {
+          btn.classList.add('bg-vini-50', 'text-vini-500', 'font-bold');
+          btn.classList.remove('text-gray-700');
+        }
+      });
+
+      // 5. Contraer el menú móvil si estuviese abierto
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIcon = document.getElementById('menuIcon');
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        if (menuIcon) {
+          menuIcon.setAttribute('data-lucide', 'menu');
+        }
+      }
+
+      // Volver a renderizar íconos en la sección actual
+      lucide.createIcons();
+
+      // Mover scroll al inicio con animación suave
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Inicializaciones al cargar el documento
     window.onload = function() {
       lucide.createIcons();
-      // Select stop 1 by default
+      // Mostrar por defecto la sección de inicio
+      showSection('inicio');
+      // Iniciar el visor de la parada en la primera estación
       selectStop(1);
     }
 
-    // Toggle Mobile Drawer Menu
+    // Desplegar menú responsive móvil
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       const icon = document.getElementById('menuIcon');
@@ -1396,9 +1392,8 @@
       lucide.createIcons();
     }
 
-    // Interactive Selector for Stops
+    // Cambiar de parada en el visor interactivo de la sección de recorrido
     function selectStop(id) {
-      // Update stop button styling
       const allButtons = document.querySelectorAll('.stop-card');
       allButtons.forEach(btn => {
         btn.classList.remove('border-vini-500', 'bg-vini-50/50', 'ring-1', 'ring-vini-500');
@@ -1411,7 +1406,6 @@
         selectedBtn.classList.remove('bg-white', 'border-arena-200');
       }
 
-      // Update Viewer content
       const stop = paradasData[id];
       document.getElementById('viewer-title').innerText = stop.title;
       document.getElementById('viewer-subtitle').innerText = stop.subtitle;
@@ -1419,13 +1413,13 @@
       document.getElementById('viewer-altitude').innerText = stop.altitude;
       document.getElementById('viewer-type').innerText = stop.type;
       document.getElementById('viewer-distance').innerText = stop.distance;
-      document.getElementById('viewer-climate').innerHTML = `<i data-lucide="cloud-sun" class="w-4 h-4 text-vini-500"></i> ${stop.climate}`;
+      document.getElementById('viewer-climate').innerHTML = `<i data-lucide="cloud-sun" class="w-4 h-4 text-vini-500 inline mr-1"></i> ${stop.climate}`;
       document.getElementById('viewer-svg').innerHTML = stop.svg;
 
       lucide.createIcons();
     }
 
-    // Live search filter in Schedule table
+    // Buscador interactivo de tabla de Horarios
     function filterSchedules() {
       const input = document.getElementById('scheduleSearch');
       const filter = input.value.toUpperCase();
@@ -1446,16 +1440,14 @@
       }
     }
 
-    // Filter by Dest click tags
+    // Filtrar tabla de Horarios por botones rápidos
     function filterByDest(dest) {
-      // Highlight selected filter tag
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => {
         btn.classList.remove('bg-vini-500', 'text-white');
         btn.classList.add('bg-arena-100', 'text-vini-900');
       });
 
-      // Find trigger button and highlight
       event.target.classList.add('bg-vini-500', 'text-white');
       event.target.classList.remove('bg-arena-100', 'text-vini-900');
 
@@ -1475,38 +1467,7 @@
       }
     }
 
-    // Toggle Contrast mode (Accessibility feature)
-    function toggleContraste() {
-      const element = document.documentElement;
-      element.classList.toggle('alto-contraste');
-      showSuccessChip("Configuración de Accesibilidad", "Contraste cromático adaptado.");
-    }
-
-    // Change Font Size
-    let baseFontSize = 100; // %
-    function changeFontSize(direction) {
-      baseFontSize += (direction * 5);
-      document.body.style.fontSize = `${baseFontSize}%`;
-      showSuccessChip("Tamaño de Letra", `Letra escalada a: ${baseFontSize}%`);
-    }
-
-    // Simulate Text-To-Speech audio notice
-    function simularVozGuia() {
-      const speechText = "Usted está visualizando la página oficial del Servicio Interurbano de Alta Montaña de la Terminal Inteligente de Mendoza. Disponemos de micros accesibles diarios hacia Potrerillos, Uspallata, Puente del Inca y Las Cuevas. Si necesita asistencia coordinada marque el teléfono 0261 476 5875.";
-      
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Parar cualquier audio anterior
-        const utterance = new SpeechSynthesisUtterance(speechText);
-        utterance.lang = 'es-AR';
-        utterance.rate = 0.95;
-        window.speechSynthesis.speak(utterance);
-        showSuccessChip("Asistente de Voz Activado", "Reproduciendo información del servicio...");
-      } else {
-        showSuccessChip("Audio Guía Simulada", "Mensaje reproducido: TIM cuenta con salidas diarias accesibles.");
-      }
-    }
-
-    // Modal Manager
+    // Controladores de Modales (Reserva y Asistencia)
     function abrirReservaModal(microInfo, destino) {
       document.getElementById('modal-title').innerText = "Reserva de Asiento";
       document.getElementById('modal-subtitle').innerText = "Consiga su pasaje de referencia para Alta Montaña.";
@@ -1533,16 +1494,17 @@
       document.getElementById('actionModal').classList.remove('hidden');
     }
 
-    // Cerrar el modal
     function cerrarActionModal() {
       document.getElementById('actionModal').classList.add('hidden');
     }
 
-    // Submit triggers and snackbars
+    // Procesadores de envío de formularios simulados
     function handleFormSubmit(event) {
       event.preventDefault();
+      const nombre = document.getElementById('contactNombre').value;
+      const asunto = document.getElementById('contactAsunto').value;
       document.getElementById('contactForm').reset();
-      showSuccessChip("¡Consulta Enviada!", "Responderemos a su correo electrónico a la brevedad.");
+      showSuccessChip("¡Consulta Enviada!", `Gracias ${nombre}. Procesamos tu solicitud sobre "${asunto}".`);
     }
 
     function handleModalSubmit(event) {
@@ -1558,6 +1520,7 @@
       }
     }
 
+    // Notificaciones no invasivas por pantalla
     function showSuccessChip(title, desc) {
       const chip = document.getElementById('successChip');
       document.getElementById('successTitle').innerText = title;
