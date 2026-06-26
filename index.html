@@ -942,32 +942,47 @@
             <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Nombre Completo</label>
-                  <input type="text" id="contactNombre" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Nombre</label>
+                  <input type="text" id="contactNombre" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Lucía">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Apellido</label>
+                  <input type="text" id="contactApellido" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Gavilán">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Edad</label>
+                  <input type="number" id="contactEdad" min="1" max="120" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="28">
                 </div>
                 <div>
                   <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Correo Electrónico</label>
-                  <input type="email" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm">
+                  <input type="email" id="contactEmail" required class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="tunombre@mail.com">
                 </div>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Asunto de consulta</label>
-                <select id="contactAsunto" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm text-gray-700">
-                  <option>Estado de Ruta 7 y Operatividad</option>
-                  <option>Reservas y Tarifas Especiales</option>
-                  <option>Asistencia de Accesibilidad</option>
-                  <option>Reclamos de Equipaje o Servicio</option>
-                </select>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Teléfono</label>
+                  <input type="tel" id="contactTelefono" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="+54 261 123 4567">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Asunto de consulta</label>
+                  <select id="contactAsunto" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm text-gray-700">
+                    <option>Estado de Ruta 7 y Operatividad</option>
+                    <option>Reservas y Tarifas Especiales</option>
+                    <option>Asistencia de Accesibilidad</option>
+                    <option>Reclamos de Equipaje o Servicio</option>
+                  </select>
+                </div>
               </div>
 
               <div>
                 <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Mensaje o Detalle</label>
-                <textarea required rows="4" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Escribí aquí tu consulta sobre horarios, equipaje, etc..."></textarea>
+                <textarea id="contactMensaje" required rows="4" class="w-full border border-arena-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-vini-500 text-sm" placeholder="Escribí aquí tu consulta sobre horarios, destinos, u otro detalle..."></textarea>
               </div>
 
               <button type="submit" class="w-full py-3.5 bg-vini-500 hover:bg-vini-600 text-white font-bold rounded-xl transition text-sm shadow-md">
-                Enviar Mensaje de Consulta
+                Enviar Información
               </button>
             </form>
           </div>
@@ -1502,9 +1517,11 @@
     function handleFormSubmit(event) {
       event.preventDefault();
       const nombre = document.getElementById('contactNombre').value;
+      const apellido = document.getElementById('contactApellido').value;
+      const edad = document.getElementById('contactEdad').value;
       const asunto = document.getElementById('contactAsunto').value;
       document.getElementById('contactForm').reset();
-      showSuccessChip("¡Consulta Enviada!", `Gracias ${nombre}. Procesamos tu solicitud sobre "${asunto}".`);
+      showSuccessChip("¡Formulario Enviado!", `Gracias ${nombre} ${apellido} (${edad} años). Recibimos tu mensaje sobre "${asunto}".`);
     }
 
     function handleModalSubmit(event) {
